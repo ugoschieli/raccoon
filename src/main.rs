@@ -23,9 +23,9 @@ fn main() {
         alignment: 0x1000,
     };
 
-    let asm = hello_world(&mut a).unwrap();
-    let mut object = create_elf(&asm, &link_opts);
-    link_elf(&asm, &mut object, &link_opts);
+    let mut asm = hello_world(&mut a).unwrap();
+    let mut object = Elf::new(&asm, &link_opts);
+    link_elf(&mut asm, &mut object, &link_opts);
 
     fs::write(args.file, object.buf).unwrap();
 }
